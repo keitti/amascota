@@ -1,0 +1,23 @@
+.tips-container {
+    display        : flex;
+    align-items: center;
+    padding        : 20px;
+    width          : 100%;
+    flex-direction : column;
+}
+
+.tips-container h2{
+    margin: 20px;
+}
+
+.tips-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    width: 100%;
+}
+
+.cc {
+    height: fit-content;
+}

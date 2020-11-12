@@ -1,0 +1,46 @@
+.carousel{
+    height: 400px;
+    width: 800px;
+    -webkit-box-shadow: -2px 18px 65px -20px rgba(0,0,0,1);
+-moz-box-shadow: -2px 18px 65px -20px rgba(0,0,0,1);
+box-shadow: -2px 18px 65px -20px rgba(0,0,0,1);
+margin-bottom: 50px;
+}
+
+.home-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.home-container h1{
+    margin-bottom: 20px;
+}
+
+.home-corousel{
+    height: 400px !important;
+}
+.home-corousel .active{
+    height: 400px !important;
+}
+
+.home-article{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-article figure img{
+     height: 150px;
+     width: 250px;
+}
+
+.home-article h3{
+    align-self: flex-start;
+    justify-self: flex-start;
+    text-align: left;
+}
