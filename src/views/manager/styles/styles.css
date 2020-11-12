@@ -1,4 +1,58 @@
+.manager{
+    color: black;
+    height: calc(100vh - 80px);
+    background-color: #DADADA;
+    /* display: flex; */
+    align-items: stretch;
+    /* text-align: center; */
+    padding: 50px;
+    margin: 10px 50px;
+    flex-direction: column;
+    border-radius: 25px;
+}
+
 .manager-header{
+    background-color: #6B5454;
+    width: 70%;
     display: flex;
     justify-content: center;
+    align-items: center !important;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.manager-header .manager-tab{
+    width: 95%;
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    margin: 10px;
+    justify-content: space-around;
+}
+
+.manager-header .active{
+    color: #000 !important;
+}
+
+.manager-header .nav-link{
+    color: #fff;
+}
+.manager-header .nav-link:hover{
+    color: #000;
+}
+.manager-header .nav-link:focus{
+    background-color:#DADADA !important;
+}
+.manager-header .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color:#DADADA !important;
+}
+.manager-header .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color:#DADADA !important;
+}
+.manager-header .dropdown-item.active, .dropdown-item:active{
+    background-color:#DADADA !important;
+}
+.manager-header .manager-header .active{
+    background-color:#DADADA !important;
 }

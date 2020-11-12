@@ -1,129 +1,101 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Swal from "sweetalert2";
+import { API } from '../../../api';
 import "../styles/styles.css";
 
 class ModalView extends Component {
     constructor() {
         super()
-        this.state = {}
+        this.state = {
+            questions: [],
+            answers: []
+        }
+    }
+
+    componentDidMount() {
+        API.GET('/preguntas')
+            .then(({ data }) => {
+                let answers = data.data.map(q => ({}));
+                this.setState({ questions: data.data, answers })
+            });
+    }
+
+    reset() {
+        this.setState({ answers: [] });
+        this.props.toggleModal();
+    }
+
+    onChange({ value }, pregunta, i) {
+        let { answers } = this.state;
+        answers[i] = {
+            pregunta,
+            respuesta: value
+        }
+        this.setState({ answers })
+    }
+
+    send() {
+        let { answers } = this.state
+        let send = {
+            id_propietario: this.props.user.id,
+            respuestas: answers
+        }
+        console.log(send);
+        API.POST('/mascota_ideal',send)
+            .then(({ data }) => {
+                if (data.ok) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: "¡Test envíado!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'danger',
+                        title: "¡Error al envríar el test!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                this.reset();
+            });
     }
 
     render() {
+        let { questions } = this.state;
         return (
             <div className="modalContainer ">
                 <form action="" className="modalForm scrollBar">
                     <h1>Conoce a tu mascota ideal.</h1>
-                    <div>
-                        <label htmlFor="">¿Que tamaño de perro te gusta?.</label>
-                        <select name="" className="form-control" id="" >
-                            <option value="-1">Seleccionar</option>
-                            <option value="-1">Me da igual</option>
-                            <option value="pequeño">Pequeño</option>
-                            <option value="pequeño">Mediano</option>
-                            <option value="pequeño">Grande</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label htmlFor="">¿Vives en?</label>
-                        <select name="" className="form-control" id="">
-                            <option value="-1">Seleccionar</option>
-                            <option value="-1">Casa</option>
-                            <option value="-1">Apartamento</option>
-                            <option value="-1">Finca</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label htmlFor="">¿Quieres que tu perro sea?</label>
-                        <select name="" className="form-control" id="">
-                            <option value="-1">Seleccionar</option>
-                            <option value="-1">Tranquilo y relajado</option>
-                            <option value="-1">Dinamico y deportista</option>
-                            <option value="-1">Tranquilo en casa y activo en calle</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label htmlFor="">¿Tu perro estara solo?</label>
-                        <select name="" className="form-control" id="">
-                            <option value="-1">Seleccionar</option>
-                            <option value="-1">Muy poco, paso mucho tiempo en casa</option>
-                            <option value="-1">No más de medio día</option>
-                            <option value="-1">8 horas o más</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label htmlFor="">¿El perro vivira con niños?</label>
-                        <select name="" className="form-control" id="">
-                            <option value="-1">Seleccionar</option>
-                            <option value="-1">No, estara en contacto con niños</option>
-                            <option value="-1">sí, de vez en cuando</option>
-                            <option value="-1">Sí, tengo niños</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label htmlFor="">¿Tines más amimales?</label>
-                        <select name="" className="form-control" id="">
-                            <option value="-1">Seleccionar</option>
-                            <option value="-1">Sí, un perro</option>
-                            <option value="-1">Sí. un gato</option>
-                            <option value="-1">Sí, un perro y un gato</option>
-                            <option value="-1">Sí, otro animal</option>
-                            <option value="-1">No</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label htmlFor="">¿Tienes experiencía educando perros?</label>
-                        <select name="" className="form-control" id="">
-                            <option value="-1">Seleccionar</option>
-                            <option value="-1">Tengo experiencía, he tenido otros perros</option>
-                            <option value="-1">No tengo mucha experiencía</option>
-                            <option value="-1">Es mi primer perro</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label htmlFor="">¿Te gustaría que tu perro fuera?</label>
-                        <select name="" className="form-control" id="">
-                            <option value="-1">Seleccionar</option>
-                            <option value="-1">Guardían</option>
-                            <option value="-1">Que sea sociable</option>
-                            <option value="-1">Cariñoso con todo el mundo</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label htmlFor="">¿Si el perro pierde pelo?</label>
-                        <select name="" className="form-control" id="">
-                            <option value="-1">Seleccionar</option>
-                            <option value="-1">Me da igual</option>
-                            <option value="-1">Me molesta un poco</option>
-                            <option value="-1">Me molesta bastante</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label htmlFor="">¿Tu edad?</label>
-                        <select name="" className="form-control" id="">
-                            <option value="-1">Seleccionar</option>
-                            <option value="-1">Tengo menos de 30 años</option>
-                            <option value="-1">Tengo entre 30 y 60 años</option>
-                            <option value="-1">Tengo más de 60 años</option>
-                        </select>
-                    </div>
-
+                    {
+                        questions.map((q, i) => (
+                            <div key={i}>
+                                <label htmlFor="">{q.nombre}</label>
+                                <select name={q.nombre} className="form-control" id={i} onChange={({ target }) => this.onChange(target, q.nombre, i)} >
+                                    <option value="no respondida">Seleccionar</option>
+                                    {
+                                        q.respuestas.map((r, j) => (
+                                            <option key={j} value={r.nombre}>{r.nombre}</option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+                        ))
+                    }
                     <div className="modalButtons">
-                        <button className="btn btn-danger" type="button" onClick={() => this.props.toggleModal()}>Cancelar</button>
-                        <button className="btn btn-success" type="button">Envíar</button>
+                        <button className="btn btn-danger" type="button" onClick={() => this.reset()}>Cancelar</button>
+                        <button className="btn btn-success" type="button" onClick={() => this.send()}>Envíar</button>
                     </div>
-
                 </form>
             </div>
         )
     }
 }
 
-export default ModalView;
+const mapStateToProps = (reducers) => reducers.usersReducer;
+
+export default connect(mapStateToProps, {})(ModalView);

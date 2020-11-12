@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { API } from "../../api";
 import CaracteriesView from "./caracteriesView";
 
 class CaracteriesContainer extends Component {
@@ -59,17 +60,32 @@ class CaracteriesContainer extends Component {
         "Munchkin",
         "etc..",
       ],
-      modal: false
+      modal: false,
+      testPending: true
     };
   }
+
+  componentDidMount() {
+    this.checkTest();
+  }
+
+  checkTest() {
+    API.GET(`/mascota_ideal/?id=${this.props.user.id}&estado=1`)
+      .then(({ data }) => {
+        if (!data.data.length) this.setState({ testPending: false })
+      })
+  }
+
   toggleModal() {
     this.setState({ modal: !this.state.modal })
+    this.checkTest();
   }
   render() {
     let { user } = this.props;
     return (
       <CaracteriesView
         user={user}
+        testPending={this.state.testPending}
         pequeño={this.state.pequeño}
         mediano={this.state.mediano}
         grande={this.state.grande}

@@ -20,7 +20,7 @@ const HeaderView = ({ rol, user }) => {
             <NavLink className="header-tab" activeClassName="active" to="/caracteristicas">Caracteristicas</NavLink>
           </li>
           {user.correo && <li className="header-tab">
-            <NavLink className="header-tab" activeClassName="active" to="/calendario">Calendario</NavLink>
+            <NavLink className="header-tab" activeClassName="active" to="/calendario">Citas</NavLink>
           </li>}
           <li className="header-tab">
             <NavLink className="header-tab" activeClassName="active" to="/tips">Tips</NavLink>
@@ -28,7 +28,7 @@ const HeaderView = ({ rol, user }) => {
           {
             user.correo ? (
               <li className="header-tabs">
-                <NavLink className="header-tab" activeClassName="active" to="/admin">Admin</NavLink>
+                <NavLink className="header-tab" activeClassName="active" to="/admin">Panel admin</NavLink>
               </li>
             )
               :

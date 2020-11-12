@@ -37,8 +37,8 @@ class AP {
                 return resp;
             });
     }
-    async DEL(link, config = {}) {
-        return await axios.delete(`${URL_API}${link}`, config)
+    async DEL(link, datos, config = {}) {
+        return await axios.delete(`${URL_API}${link}`, datos, config)
             .then((resp) => {
                 return resp;
             });

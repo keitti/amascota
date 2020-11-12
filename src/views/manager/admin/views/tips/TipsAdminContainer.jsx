@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Swal from 'sweetalert2';
-import { API } from '../../../../api';
+import { API } from '../../../../../api';
+import saveFile from '../../../../../components/files';
 import TipsAdminView from "./TipsAdminView";
 
 class TipsAdminContainer extends Component {
@@ -11,9 +12,13 @@ class TipsAdminContainer extends Component {
             newTip: {
                 nombre: '',
                 descripcion: '',
+                imagen: null
             },
             isRegister: true,
             idToEdit: 0,
+            img: null,
+            file: null,
+            clear:false
         };
     }
 
@@ -27,13 +32,30 @@ class TipsAdminContainer extends Component {
         )
     }
 
+    reset() {
+        this.setState({
+            newTip: {
+                nombre: '',
+                descripcion: '',
+                imagen: null
+            },
+            isRegister: true,
+            idToEdit: 0,
+            img: null,
+            file: null,
+            clear:false
+        });
+        this.componentDidMount();
+    }
+
     onChange({ name, value }) {
         let { newTip } = this.state;
         this.setState({
             newTip: {
                 ...newTip,
                 [name]: value,
-            }
+            },
+            clear: true
         });
         console.log(this.state.newTip);
     }
@@ -47,15 +69,11 @@ class TipsAdminContainer extends Component {
         }
     }
 
-    register() {
-        let { newTip } = this.state;
-        let data = {
-            ...newTip,
-        }
-
-        API.POST("/tips", data)
+    async register() {
+        let { newTip, file } = this.state;
+        if (file) newTip.imagen = await saveFile(file);
+        API.POST("/tips", newTip)
             .then(({ data }) => {
-                console.log(data)
                 if (data.ok) {
                     Swal.fire({
                         position: 'center',
@@ -64,7 +82,7 @@ class TipsAdminContainer extends Component {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    this.componentDidMount();
+                    this.reset();
                 } else {
                     alert("Error al registrarse")
                 }
@@ -72,13 +90,10 @@ class TipsAdminContainer extends Component {
             .catch(e => alert("Error al registrarse"))
     }
 
-    modify() {
-        let { newTip, idToEdit } = this.state;
-        let data = {
-            ...newTip,
-        }
-
-        API.PUT(`/tips/${idToEdit}`, data)
+    async modify() {
+        let { newTip, idToEdit, file } = this.state;
+        if (file) newTip.imagen = await saveFile(file);
+        API.PUT(`/tips/${idToEdit}`, newTip)
             .then(({ data }) => {
                 console.log(data)
                 if (data.ok) {
@@ -89,7 +104,7 @@ class TipsAdminContainer extends Component {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    this.componentDidMount();
+                    this.reset();
                 } else {
                     alert("Error al editar")
                 }
@@ -121,7 +136,7 @@ class TipsAdminContainer extends Component {
                             showConfirmButton: false,
                             timer: 1500
                         });
-                        this.componentDidMount();
+                        this.reset();
                     } else {
                         alert("Error al eliminar")
                     }
@@ -133,8 +148,7 @@ class TipsAdminContainer extends Component {
 
     toggleType(isRegister, newTip) {
         if (newTip) {
-            const { nombre, descripcion, id } = newTip;
-            this.setState({ isRegister, newTip: { nombre, descripcion }, idToEdit: id });
+            this.setState({ isRegister, newTip, idToEdit: newTip.id });
         } else {
             this.setState({ isRegister });
 
@@ -144,13 +158,17 @@ class TipsAdminContainer extends Component {
     render() {
         return (
             <TipsAdminView
+                clear={this.state.clear}
                 tips={this.state.tips}
-                FonChange={(value) => this.onChange(value)}
+                img={this.state.img}
+                isRegister={this.state.isRegister}
+                tip={this.state.newTip}
+                onChange={(value) => this.onChange(value)}
                 save={() => this.saveData()}
                 deleteTip={(value) => this.delete(value)}
                 toggleType={(value1, value2) => this.toggleType(value1, value2)}
-                isRegister={this.state.isRegister}
-                tip={this.state.newTip}
+                reset={() => this.reset()}
+                setState={(values) => this.setState(values)}
             />
         );
     }

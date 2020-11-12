@@ -5,11 +5,13 @@ import Razas from './components/Razas';
 
 import "./styles/styles.css";
 
-const CaracteriesView = ({ pequeño, mediano, grande, gato, modal, toggleModal, user }) => (
+const CaracteriesView = ({ testPending, pequeño, mediano, grande, gato, modal, toggleModal, user }) => (
     <div className="carateries-container">
-        {(user.correo && !user.rol) && <button className="btn btn-warning btn-M" type="button" onClick={() => toggleModal()}>
-            Tu máscota ideal
-        </button>}
+        {(user.correo && !user.rol) && (
+             <button disabled={testPending} className={`btn btn-${!testPending?"warning":"primary"} btn-M`} type="button" onClick={() => toggleModal()}>
+                {!testPending?"Tu máscota ideal":"Test pendiente"}
+            </button>
+        )}
         <Modal
             open={modal}
             onClose={() => toggleModal()}
@@ -171,7 +173,7 @@ const CaracteriesView = ({ pequeño, mediano, grande, gato, modal, toggleModal, 
             </p>
             <Razas razas={gato} />
         </div>
-        {(user.correo && !user.rol) && <button className="btn btn-warning" type="button" onClick={() => toggleModal()}>
+        {(user.correo && !user.rol) && !testPending && <button className="btn btn-warning" type="button" onClick={() => toggleModal()}>
             Tu máscota ideal
         </button>}
     </div>

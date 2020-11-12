@@ -36,7 +36,7 @@ class QuestionPending extends Component {
     }
 
     getAnswer() {
-        API.GET(`/mascota_ideal`)
+        API.GET(`/mascota_ideal/?id=${this.props.user.id}`)
             .then(({ data }) => {
                 if (data.ok) {
                     this.setState({ answers: data.data })
@@ -87,9 +87,7 @@ class QuestionPending extends Component {
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Usurio</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Fecha realizada</th>
+                                <th scope="col">Fecha relizada</th>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Ver</th>
                             </tr>
@@ -100,13 +98,7 @@ class QuestionPending extends Component {
                                     <tr key={i}>
                                         <th scope="row">{i + 1}</th>
                                         <td>
-                                            {a.propietario}
-                                        </td>
-                                        <td>
-                                            {a.correo}
-                                        </td>
-                                        <td>
-                                        {moment(a.fecha_registro).format("YYYY-MM-DD")}
+                                            {moment(a.fecha_registro).format("YYYY-MM-DD")}
                                         </td>
                                         <td>
                                             {

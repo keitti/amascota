@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { URL_API } from '../../../api';
 
 const useStyles = makeStyles({
   root: {
@@ -28,17 +29,15 @@ export default function TipsCard({tip}) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={require("../../../assets/perros/"+tip.img)}
+          image={tip.imagen? `${URL_API}/file/${tip.imagen}` :require("../../../assets/perros/perro7.jpg")}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {tip.title}
+            {tip.nombre}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {tip.description}
-            {tip.description}
-            {tip.description}
+            {tip.descripcion}
           </Typography>
         </CardContent>
       </CardActionArea>

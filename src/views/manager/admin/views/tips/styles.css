@@ -1,0 +1,7 @@
+.tips-admin-container {
+    padding: 30px;
+}
+
+.form-tips, .list-tips{
+    height: inherit;
+}

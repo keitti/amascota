@@ -1,0 +1,32 @@
+.cita-admin-container{
+    color: black;
+    /* height: calc(100vh - 80px); */
+    background-color: #DADADA;
+    display: flex;
+    /* align-items: stretch; */
+    /* text-align: center; */
+    padding: 50px;
+    margin: 10px 50px;
+    flex-direction: column;
+    border-radius: 25px;
+}
+
+.cita-admin-container {
+    padding: 30px;
+}
+
+.list-cita{
+    height: inherit;
+}
+
+.form-cita{
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid #6B5454;
+}
+
+.btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

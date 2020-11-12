@@ -1,7 +1,7 @@
 .calendar-container{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
     height: calc(100vh - 75px);
     background-image: url("../../../assets/calendar.jpg");
     background-size: cover;
@@ -13,15 +13,70 @@
     background-color: rgba(0, 0, 0, 0.8);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
 }
 
 .calendar-capa h2{
     color: white;
     margin-bottom: 30px;
+    text-align: center;
+}
+
+.cita-container{
+    /* background-color: red; */
+    display: flex;
+    /* align-items: center; */
+    height: 100%;
+    /* justify-content: ; */
 }
 
 .calendar{
-    color: white !important;
+    /* background-color: greenyellow;  */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.citas-list{
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-direction: column;
+    padding: 15px;
+    height: 550px;
+    border-top-left-radius: 25px;
+    
+}
+
+.citas-card{
+    background-color: #DADADA;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    margin: 10px 0;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.citas-card:hover{
+    background-color: #6B5454;
+    color: #fff !important;
+}
+
+.citas-card span{
+    text-decoration: wavy;
+    font-size: 15px;
+    /* color: gray; */
+    text-transform: capitalize;
+}
+
+.modalForm p{
+ text-transform: capitalize;
+}
+
+.disableCard span{
+    color: #B1452E;
 }
