@@ -22,7 +22,7 @@ class HomeContainer extends Component {
   render() {
     return (
       <div className="home-container" >
-        <h1>¡Calidad de vida para tu mascota!</h1>
+        <h1>¡Calidad de vidad para tu mascota!</h1>
         <div
           id="carouselExampleControls"
           class="carousel slide"
