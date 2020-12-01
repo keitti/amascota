@@ -13,7 +13,7 @@ const HeaderAdmin = ({ logOut }) => (
                 <li className="nav-item dropdown align-self-center" role="presentation">
                     <a className="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tu mascota ideal</a>
                     <div className="dropdown-menu">
-                        <a className="dropdown-item active" id="pills-questionList-tab" data-toggle="pill" href="#pills-questionList" role="tab" aria-controls="pills-questionList" aria-selected="true">Solicitudes</a>
+                        <a className="dropdown-item active" id="pills-questionList-tab" data-toggle="pill" href="#pills-questionList" role="tab" aria-controls="pills-questionList" aria-selected="true">Test Realizados</a>
                         <a className="dropdown-item" id="pills-questionCreate-tab" data-toggle="pill" href="#pills-questionCreate" role="tab" aria-controls="pills-questionCreate" aria-selected="false">Administrar preguntas</a>
                     </div>
                 </li>

@@ -26,7 +26,7 @@ const ProfielView = (({ user }) => (
                     <input disabled className="form-control" value={ moment(user.fecha_registro).format("LL")} />
                 </div>
             </div>
-            <h2>Mascota</h2>
+            {/* <h2>Mascota</h2>
             <div className="row">
                 <div className="col-md-6">
                     <label>Nombre</label>
@@ -56,7 +56,7 @@ const ProfielView = (({ user }) => (
                     <label>Sobre tu mascota</label>
                     <textarea disabled className="form-control" value={user.descripcion} />
                 </div>
-            </div>
+            </div> */}
         </div>
     </main>
 ))
